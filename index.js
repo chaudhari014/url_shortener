@@ -13,7 +13,7 @@ app.use(express.json())
 // })
 app.use("/",userRouteHandler)
 // security authentication middleware 
-app.use(auth)
+
 
 app.use("/",short_URL)
 

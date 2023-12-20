@@ -7,14 +7,14 @@ const convertToShort= async(req,res)=>{
    try {
     const checkurl=await urlModel.findOne({originalUrl:originalUrl})
     if(checkurl){
-      return  res.status(200).json({"orignalUrl":checkurl.originalUrl,"shortUrl":`http://localhost:8060/${checkurl.shortUrl}` })
+      return  res.status(200).json({"orignalUrl":checkurl.originalUrl,"shortUrl":`https://urlshortner-5ek6.onrender.com/${checkurl.shortUrl}` })
     }
     const shortUrl=generateRandomBase62String(4)
     // store inside DB
     const urlData=new urlModel({originalUrl,shortUrl})
      const saveData=await urlData.save()
     //  console.log(saveData)
-    return res.status(200).json({"originalUrl":saveData.originalUrl,"shortUrl":`http://localhost:8060/${saveData.shortUrl}`})
+    return res.status(200).json({"originalUrl":saveData.originalUrl,"shortUrl":`https://urlshortner-5ek6.onrender.com/${saveData.shortUrl}`})
 
     
    } catch (error) {
@@ -31,9 +31,9 @@ const convertToOrignal=async (req,res)=>{
     const result=await urlModel.findOne({shortUrl})
     // console.log(result)
     if(result){
-      return   res.status(200).json({"originalUrl":result.originalUrl})
+         res.redirect(result.originalUrl);
     }else{
-        return res.status(400).json({"msg":"wrong url"})
+        return res.status(400).json({"msg":"wrong  url end point"})
     }
  } catch (error) {
     return res.status(400).json({"error":error.message})
