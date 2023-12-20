@@ -26,3 +26,23 @@ Before running the project, make sure to install the required dependencies:
    ```
 
 4. Access Code Converter in your browser at `http://localhost:8060`.
+
+# Registration
+
+To register, provide an email and password.
+
+# Login
+
+After registration, use your email and password to log in. The server will respond with a JWT (JSON Web Token). Include this token in the headers of your requests for secure access.
+
+# URL Shortening
+
+#Shorten a URL
+
+Send a `POST` request to `/shorten` with the original URL in the request body. The server will generate a short URL for you.
+
+# Retrieve Original URL
+
+To retrieve the original URL, send a `GET` request to `/:shortUrl`. Replace :shortUrl with the short URL you received when shortening.
+
+
