@@ -1,16 +1,25 @@
 const express=require("express")
 const { connection } = require("./config/db")
+const { short_URL } = require("./routes/shorturl.route")
+const { auth } = require("./middleware/auth")
+const { userRouteHandler } = require("./routes/user.route")
 require("dotenv").config()
-const app=express()
 
+const app=express()
+app.use(express.json())
 // home route
-app.get("/",(req,res)=>{
-  return  res.status(200).json({msg:"Welcome to Url Shortener"})
-})
+// app.get("/",(req,res)=>{
+//   return  res.status(200).json({msg:"Welcome to Url Shortener"})
+// })
+app.use("/",userRouteHandler)
+// security authentication middleware 
+app.use(auth)
+
+app.use("/",short_URL)
 
 // route not found
 app.use((req,res)=>{
-   return res.status(404).json({msg:"not found"})
+   return res.status(404).json({msg:"end point not found"})
 })
 
 // catch internal server error
